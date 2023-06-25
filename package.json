@@ -1,0 +1,63 @@
+{
+  "name": "broxus-docs-kit",
+  "version": "0.0.1",
+  "description": "Broxus Docs Kit",
+  "license": "MIT",
+  "repository": "https://github.com/cyace84/broxus-docs-kit",
+  "author": "Valentyn Zavizion",
+  "main": "dist/index.js",
+  "types": "./dist/cli/index.d.ts",
+  "bin": {
+    "broxus-docs-kit": "bin/broxus-docs-kit.js"
+  },
+  "exports": {
+    "./theme": "./src/template/.vitepress/theme/broxusTheme.js"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/src/template",
+    "!/dist/.tsbuildinfo",
+    "/LICENSE",
+    "/package.json"
+  ],
+  "scripts": {
+    "build:clean": "rm -rf dist",
+    "build:tsc": "tsc",
+    "build:components": "node ./scripts/build-components.js",
+    "build": "npm run build:clean && npm run build:tsc && npm run build:components",
+    "bins": "node bin/broxus-docs-kit",
+    "lint": "eslint 'src/**/*.{js,ts,vue}'"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "everscale-inpage-provider": "0.3.61",
+    "everscale-standalone-client": "2.1.19",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/escodegen": "^0.0.7",
+    "@types/esprima": "^4.0.3",
+    "@types/fs-extra": "^11.0.1",
+    "@types/lodash": "^4.14.195",
+    "@types/node": "^20.3.1",
+    "@types/prompts": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "escodegen": "^2.0.0",
+    "eslint": "8.43.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-sonarjs": "^0.19.0",
+    "eslint-plugin-vue": "^9.15.1",
+    "prompts": "^2.4.2",
+    "rollup": "^3.25.1",
+    "sass": "^1.63.6",
+    "typescript": "5.0.4",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.3.9",
+    "vue": "^3.3.4"
+  }
+}
