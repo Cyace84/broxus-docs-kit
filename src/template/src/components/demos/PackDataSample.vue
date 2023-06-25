@@ -14,16 +14,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
     const user = ref({
-      name: "",
+      name: '',
       age: null,
     });
 
-    const packedData = ref("");
+    const packedData = ref('');
 
     function packData() {
       packedData.value = JSON.stringify(user.value, null, 2);
