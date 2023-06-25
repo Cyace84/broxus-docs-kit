@@ -1,21 +1,21 @@
 <template>
-  <div class="input-domain" contenteditable="true" @input="updateValue" data-post-fix=".ever">
+  <div class="input-domain" contenteditable="true" data-post-fix=".ever" @input="updateValue">
     {{ value }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, toRefs, PropType } from "vue";
+import { defineComponent, ref, watch, toRefs, PropType } from 'vue';
 
 export default defineComponent({
-  name: "EditableInput",
+  name: 'EditableInput',
   props: {
     modelValue: {
       type: String as PropType<string>,
-      default: "",
+      default: '',
     },
   },
-  emits: ["update:modelValue"],
+  emits: ['update:modelValue'],
   setup(props, { emit }) {
     const { modelValue } = toRefs(props);
 
@@ -27,7 +27,7 @@ export default defineComponent({
 
     const updateValue = (event: Event) => {
       const target = event.target as HTMLInputElement;
-      emit("update:modelValue", target.textContent || "");
+      emit('update:modelValue', target.textContent || '');
     };
 
     return { value, updateValue };

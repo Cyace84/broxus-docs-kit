@@ -1,6 +1,6 @@
 <template>
   <div class="demo accordion">
-    <button @click="toggleAccordion" class="">
+    <button class="" @click="toggleAccordion">
       {{ buttonText }}
     </button>
     <div v-show="isOpen" class="">
@@ -13,7 +13,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'Accordion',
+  name: 'AccordionElement',
   props: {
     buttonText: {
       type: String,

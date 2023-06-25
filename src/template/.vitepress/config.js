@@ -1,65 +1,65 @@
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import Components from "unplugin-vue-components/vite";
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+import Components from 'unplugin-vue-components/vite';
 
-const HELP_URL = "{{HELP_URL}}";
-const FEEDBACK_URL = "{{FEEDBACK_URL}}";
-const GITHUB_URL = "{{GITHUB_URL}}";
+const HELP_URL = '{{HELP_URL}}';
+const FEEDBACK_URL = '{{FEEDBACK_URL}}';
+const GITHUB_URL = '{{GITHUB_URL}}';
 
 module.exports = {
-  title: "{{docTitle}}",
-  base: "",
-  description: "{{projectName}}",
+  title: '{{docTitle}}',
+  base: '',
+  description: '{{projectName}}',
 
   plugins: [vue(), Components({ dst: true })],
   resolve: {
     alias: {
-      "@themeComponents": resolve(__dirname, "{{componentsPath}}"),
-      "@themeStyles": resolve(__dirname, "{{stylesPath}}"),
-      "@components": "./../src/components",
-      "@styles": "./../src/styles",
+      '@themeComponents': resolve(__dirname, '{{componentsPath}}'),
+      '@themeStyles': resolve(__dirname, '{{stylesPath}}'),
+      '@components': './../src/components',
+      '@styles': './../src/styles',
     },
   },
   themeConfig: {
     search: {
-      provider: "local",
+      provider: 'local',
     },
     nav: [
-      { text: "Feedback", link: FEEDBACK_URL },
-      { text: "Community", link: HELP_URL },
+      { text: 'Feedback', link: FEEDBACK_URL },
+      { text: 'Community', link: HELP_URL },
     ],
     sidebar: [
-      { text: "Introduction", link: "/" },
+      { text: 'Introduction', link: '/' },
       {
-        text: "Guide",
+        text: 'Guide',
         collapsable: false,
 
         items: [
           {
-            text: "Sample Page",
+            text: 'Sample Page',
             collapsable: false,
-            link: "/guides/sample-guide.md",
+            link: '/guides/sample-guide.md',
           },
         ],
       },
       {
-        text: "API Reference",
+        text: 'API Reference',
         collapsable: false,
 
         items: [
           {
-            text: "Sample Page",
+            text: 'Sample Page',
             collapsable: false,
-            link: "/api-reference/sample-page.md",
+            link: '/api-reference/sample-page.md',
           },
         ],
       },
     ],
 
-    socialLinks: [{ icon: "github", link: GITHUB_URL }],
+    socialLinks: [{ icon: 'github', link: GITHUB_URL }],
   },
 
   esbuild: {
-    target: ["chrome89", "edge89", "firefox79", "safari14.1"],
+    target: ['chrome89', 'edge89', 'firefox79', 'safari14.1'],
   },
 };

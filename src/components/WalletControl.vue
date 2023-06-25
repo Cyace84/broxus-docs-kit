@@ -1,7 +1,7 @@
 <template>
   <div class="walletControl">
     <button v-if="connected" @click="changeAccount">Change Account</button>
-    <button class="disconnectBtn" v-if="connected" @click="disconnect">
+    <button v-if="connected" class="disconnectBtn" @click="disconnect">
       <DisconnectIcon :size="16" />
     </button>
     <button v-else @click="requestPermissions">Connect</button>
@@ -9,19 +9,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { ProviderRpcClient } from "everscale-inpage-provider";
-import DisconnectIcon from "./shared/DisconnectIcon.vue";
+import { ProviderRpcClient } from 'everscale-inpage-provider';
+import { defineComponent, ref } from 'vue';
+
+import DisconnectIcon from './shared/DisconnectIcon.vue';
 
 export default defineComponent({
-  name: "WalletControl",
+  name: 'WalletControl',
+  components: {
+    DisconnectIcon,
+  },
   async setup() {
     const connected = ref(false);
 
     const provider = new ProviderRpcClient();
-    provider.subscribe("permissionsChanged").then((subscription) => {
-      subscription.on("data", (permissions) => {
-        console.log("permissionsChanged", permissions);
+    provider.subscribe('permissionsChanged').then(subscription => {
+      subscription.on('data', permissions => {
         connected.value = !!permissions.permissions;
       });
     });
@@ -31,13 +34,10 @@ export default defineComponent({
 
     return { connected, provider };
   },
-  components: {
-    DisconnectIcon,
-  },
   methods: {
     async requestPermissions() {
       await this.provider.requestPermissions({
-        permissions: ["basic", "accountInteraction"],
+        permissions: ['basic', 'accountInteraction'],
       });
     },
     async disconnect() {

@@ -9,6 +9,7 @@
 <script land="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
+  name: 'SimpleToast',
   props: {
     message: String,
     type: String,
@@ -22,6 +23,9 @@ export default defineComponent({
       visible: false,
     };
   },
+  mounted() {
+    this.show();
+  },
   methods: {
     show() {
       this.visible = true;
@@ -32,9 +36,6 @@ export default defineComponent({
     updateVisibility() {
       this.$emit('update');
     },
-  },
-  mounted() {
-    this.show();
   },
 });
 </script>

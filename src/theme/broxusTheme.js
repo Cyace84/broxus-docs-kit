@@ -4,10 +4,10 @@ import DefaultTheme from "vitepress/theme";
 
 import AppLayout from "./../components/AppLayout.vue";
 import Page from "./../components/Page.vue";
-import OutlineComponent from "./../components/shared/outline/Outline.vue";
-import OutlineItem from "./../components/shared/outline/OutlineItem.vue";
 import AccordionComponent from "./../components/shared/Accordion.vue";
 import DisconnectIcon from "./../components/shared/DisconnectIcon.vue";
+import OutlineComponent from "./../components/shared/outline/Outline.vue";
+import OutlineItem from "./../components/shared/outline/OutlineItem.vue";
 
 export default {
   ...DefaultTheme,

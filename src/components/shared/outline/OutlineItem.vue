@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { nextTick } from 'vue';
-import { type MenuItem } from 'vitepress/dist/client/theme-default/composables/outline';
-import { useAside } from 'vitepress/dist/client/theme-default/composables/aside';
-
-import { isAnchorActive } from './outline';
+import { type MenuItem } from './outline';
 
 defineProps<{
   headers: MenuItem[];
   root?: boolean;
 }>();
-
-const { isAsideEnabled } = useAside();
 
 const emit = defineEmits(['update-marker']);
 
@@ -27,7 +22,7 @@ async function onClick({ target: el }: Event) {
 <template>
   <ul :class="root ? 'root' : 'nested'">
     <li v-for="{ children, link, title } in headers">
-      <a class="outline-link" :href="link" @click="onClick" :title="title">{{ title }}</a>
+      <a class="outline-link" :href="link" :title="title" @click="onClick">{{ title }}</a>
       <template v-if="children?.length">
         <OutlineItem :headers="children" />
       </template>

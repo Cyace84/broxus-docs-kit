@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, shallowRef, watch, nextTick, onBeforeUnmount, onMounted, h } from 'vue';
-import { type MenuItem } from 'vitepress/dist/client/theme-default/composables/outline';
-import { useData } from 'vitepress';
-import OutlineItem from './OutlineItem.vue';
+import { useData, type DefaultTheme } from 'vitepress';
+import { ref, shallowRef, watch, nextTick, h } from 'vue';
 
-import { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor } from './outline';
+import { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor, type MenuItem } from './outline';
+import OutlineItem from './OutlineItem.vue';
 
 const { frontmatter, theme } = useData();
 
@@ -19,17 +18,19 @@ const props = defineProps<{
   content: string;
 }>();
 
-const getHeaders = range => {
+const getHeaders = (range: number | false | DefaultTheme.Outline | [number, number] | 'deep' | undefined) => {
   const headers = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6'))
     .filter(el => el.id && el.hasChildNodes())
     .map(el => {
       const level = Number(el.tagName[1]);
+
       return {
         title: serializeHeader(el),
         link: '#' + el.id,
         level,
       };
     });
+
   return resolveHeaders(headers, range);
 };
 
@@ -51,14 +52,16 @@ watch(
 </script>
 
 <template>
-  <div class="asideOutline" :class="{ 'has-outline': headers.length > 0 }" ref="container">
+  <div ref="container" class="asideOutline" :class="{ 'has-outline': headers.length > 0 }">
     <div class="content">
-      <div class="outline-marker" ref="marker" />
+      <div ref="marker" class="outline-marker" />
 
-      <div class="outline-title">{{ resolveTitle(theme) }}</div>
+      <div class="outline-title">
+        {{ resolveTitle(theme) }}
+      </div>
 
       <nav aria-labelledby="doc-outline-aria-label">
-        <span class="visually-hidden" id="doc-outline-aria-label"> Table of Contents for current page </span>
+        <span id="doc-outline-aria-label" class="visually-hidden"> Table of Contents for current page </span>
         <OutlineItem :headers="headers" :root="true" />
       </nav>
     </div>

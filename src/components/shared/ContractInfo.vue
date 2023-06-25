@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="contract-state" v-if="parsedState">Simple State: {{ parsedState.simpleState }}</div>
+    <div v-if="parsedState" class="contract-state">Simple State: {{ parsedState.simpleState }}</div>
     <div>
       <label for="someParam">SomeParam:</label>
       <input id="someParam" type="number" v-model="someParam" />

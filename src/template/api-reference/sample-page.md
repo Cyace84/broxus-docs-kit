@@ -29,9 +29,12 @@ The key components in the page's script include Vue's `onMounted` and `onUpdated
 The API request is made using the `getApiReference` function:
 
 ```javascript
-export async function getApiReference(projectName: string, pageName: string) {
-  const prod = "https://creaitive.cloud/api/v1/get/api-reference";
-  const dev = "http://localhost:3000/api/v1/get/api-reference";
+export async function getApiReference(
+  projectName: string,
+  pageName: string,
+) {
+  const prod = 'https://creaitive.cloud/api/v1/get/api-reference';
+  const dev = 'http://localhost:3000/api/v1/get/api-reference';
   const url = `${dev}?projectName=${encodeURIComponent(projectName)}`;
 
   // rest of the function
