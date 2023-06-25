@@ -1,4 +1,8 @@
 {
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "extends": [
     "plugin:vue/recommended",
     "plugin:import/errors",
@@ -7,7 +11,8 @@
     "plugin:sonarjs/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "prettier"
   ],
   "plugins": ["@typescript-eslint", "import", "prettier", "sonarjs", "vue"],
   "parser": "vue-eslint-parser",
@@ -16,10 +21,15 @@
     "project": "./tsconfig.eslint.json",
     "extraFileExtensions": [".vue"]
   },
-  "ignorePatterns": ["graphql.ts"],
   "settings": {
+    "import/extensions": [".ts", ".tsx", ".js", ".scss", ".css", ".vue"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
-      "typescript": {}
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   },
   "rules": {
@@ -28,11 +38,7 @@
     "import/order": [
       "error",
       {
-        "groups": [
-          ["external", "builtin"],
-          "internal",
-          ["parent", "sibling", "index"]
-        ],
+        "groups": [["external", "builtin"], "internal", ["parent", "sibling", "index"]],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
@@ -52,10 +58,7 @@
       }
     ],
     "import/no-default-export": "off",
-    "no-restricted-exports": [
-      "error",
-      { "restrictedNamedExports": ["default"] }
-    ],
+    "no-restricted-exports": ["error", { "restrictedNamedExports": ["default"] }],
     "curly": "error",
     "no-console": "error",
     "no-shadow": "off",
