@@ -85,7 +85,7 @@ async function copyAdditionalFiles(folderName: string) {
 }
 
 export async function copyTemplateFiles(folderName: string, mode: string) {
-  const templatePath = path.join(__dirname, '../../src/template');
+  const templatePath = path.join(__dirname, '../../../template');
 
   if (!fs.existsSync(folderName)) {
     fs.mkdirSync(folderName);
