@@ -1,24 +1,24 @@
-import "./main.scss";
+import DefaultTheme from 'vitepress/theme';
 
-import DefaultTheme from "vitepress/theme";
+import BDKLayout from './components/BDKLayout.vue';
+import BDKPage from './components/BDKPage.vue';
+import BDKAccordion from './components/shared/BDKAccordion.vue';
+import BDKDisconnectIcon from './components/shared/BDKDisconnectIcon.vue';
+import BDKOutline from './components/shared/outline/BDKOutline.vue';
+import BDKOutlineItem from './components/shared/outline/BDKOutlineItem.vue';
 
-import AppLayout from "./../components/AppLayout.vue";
-import Page from "./../components/Page.vue";
-import AccordionComponent from "./../components/shared/Accordion.vue";
-import DisconnectIcon from "./../components/shared/DisconnectIcon.vue";
-import OutlineComponent from "./../components/shared/outline/Outline.vue";
-import OutlineItem from "./../components/shared/outline/OutlineItem.vue";
+import './main.scss';
 
 export default {
   ...DefaultTheme,
   Layout: AppLayout,
   enhanceApp({ app }) {
     DefaultTheme.enhanceApp({ app });
-    app.component("AppLayout", AppLayout);
-    app.component("Page", Page);
-    app.component("Outline", OutlineComponent);
-    app.component("OutlineItem", OutlineItem);
-    app.component("DisconnectIcon", DisconnectIcon);
-    app.component("Accordion", AccordionComponent);
+    app.component('BDKLayout', BDKLayout);
+    app.component('BDKPage', BDKPage);
+    app.component('BDKOutline', BDKOutline);
+    app.component('BDKOutlineItem', BDKOutlineItem);
+    app.component('BDKDisconnectIcon', BDKDisconnectIcon);
+    app.component('BDKAccordion', BDKAccordion);
   },
 };

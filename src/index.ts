@@ -1,4 +1,4 @@
-import AppLayout from "./components/AppLayout.vue";
-import WalletControl from "./components/WalletControl.vue";
+import BDKLayout from './theme/components/BDKLayout.vue';
+import BDKWalletControl from './theme/components/BDKWalletControl.vue';
 
-export { AppLayout, WalletControl };
+export { BDKLayout, BDKWalletControl };

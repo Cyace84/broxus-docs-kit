@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
-const tsConfig = require("./../tsconfig.json");
+const fs = require('fs');
+const path = require('path');
+const tsConfig = require('./../tsconfig.json');
 
 function copyFileSync(source, target) {
   let targetFile = target;
@@ -48,7 +48,7 @@ function copyFolderRecursiveSync(source, target) {
   }
 }
 
-const sources = ["src/components", "src/styles"];
+const sources = ['src/theme/components', 'src/theme/styles'];
 const target = tsConfig.compilerOptions.outDir;
 
-sources.forEach((source) => copyFolderRecursiveSync(source, target));
+sources.forEach(source => copyFolderRecursiveSync(source, target));

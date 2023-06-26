@@ -10,12 +10,12 @@ export default {
   //   dest: ".vitepress/theme/Layout.vue",
   // },
   components: {
-    src: path.join(__dirname, './../components'),
+    src: path.join(__dirname, './../theme/components'),
     dest: '.vitepress/theme/components',
     itsDir: true,
   },
   styles: {
-    src: path.join(__dirname, './../styles'),
+    src: path.join(__dirname, './../theme/styles'),
     dest: '.vitepress/theme/styles',
     itsDir: true,
   },

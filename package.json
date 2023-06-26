@@ -6,7 +6,6 @@
   "repository": "https://github.com/cyace84/broxus-docs-kit",
   "author": "Valentyn Zavizion",
   "main": "dist/index.js",
-  "types": "./dist/cli/index.d.ts",
   "bin": {
     "broxus-docs-kit": "bin/broxus-docs-kit.js"
   },
@@ -17,7 +16,6 @@
     "/bin",
     "/dist",
     "/src/template",
-    "!/dist/.tsbuildinfo",
     "/LICENSE",
     "/package.json"
   ],
