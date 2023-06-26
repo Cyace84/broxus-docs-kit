@@ -3,7 +3,7 @@
     <div v-if="parsedState" class="contract-state">Simple State: {{ parsedState.simpleState }}</div>
     <div>
       <label for="someParam">SomeParam:</label>
-      <input id="someParam" type="number" v-model="someParam" />
+      <input id="someParam" v-model="someParam" type="number" />
     </div>
     <button @click="sendMessage">Send Message</button>
   </div>
@@ -13,7 +13,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'ContractInfo',
+  name: 'BDKContractInfo',
   props: {
     contractState: {
       type: String,
@@ -21,14 +21,16 @@ export default defineComponent({
     },
     onSendMessage: {
       type: Function,
-      default: () => {},
+      default: undefined,
     },
   },
   setup(props) {
     const someParam = ref(0);
 
     function sendMessage() {
-      props.onSendMessage(someParam.value);
+      if (props.onSendMessage) {
+        props.onSendMessage(someParam.value);
+      }
     }
 
     return { someParam, sendMessage };

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useData, type DefaultTheme } from 'vitepress';
-import { ref, shallowRef, watch, nextTick, h } from 'vue';
+import { ref, shallowRef, watch, nextTick } from 'vue';
 
+import OutlineItem from './BDKOutlineItem.vue';
 import { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor, type MenuItem } from './outline';
-import OutlineItem from './OutlineItem.vue';
 
 const { frontmatter, theme } = useData();
 
@@ -15,11 +15,11 @@ const marker = ref();
 useActiveAnchor(container, marker);
 
 const props = defineProps<{
-  content: string;
+  content: string | undefined;
 }>();
 
 const getHeaders = (range: number | false | DefaultTheme.Outline | [number, number] | 'deep' | undefined) => {
-  const headers = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6'))
+  const _headers = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6'))
     .filter(el => el.id && el.hasChildNodes())
     .map(el => {
       const level = Number(el.tagName[1]);
@@ -31,7 +31,7 @@ const getHeaders = (range: number | false | DefaultTheme.Outline | [number, numb
       };
     });
 
-  return resolveHeaders(headers, range);
+  return resolveHeaders(_headers, range);
 };
 
 watch(
@@ -40,14 +40,14 @@ watch(
     if (typeof window !== 'undefined') {
       nextTick(() => {
         const el = document.createElement('div');
-        el.innerHTML = props.content;
+        el.innerHTML = props.content ?? '';
 
         const outlineRange = frontmatter.value.outline ?? 2;
         headers.value = getHeaders(outlineRange);
       });
     }
   },
-  { immediate: true },
+  { immediate: true }
 );
 </script>
 

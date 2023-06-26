@@ -8,7 +8,7 @@
 import { defineComponent, ref, watch, toRefs, PropType } from 'vue';
 
 export default defineComponent({
-  name: 'EditableInput',
+  name: 'BDKEditableInput',
   props: {
     modelValue: {
       type: String as PropType<string>,

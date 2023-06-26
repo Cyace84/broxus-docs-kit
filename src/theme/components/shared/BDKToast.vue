@@ -9,10 +9,16 @@
 <script land="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'SimpleToast',
+  name: 'BDKToast',
   props: {
-    message: String,
-    type: String,
+    message: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: 'info',
+    },
     duration: {
       type: Number,
       default: 3000,

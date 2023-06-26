@@ -12,10 +12,10 @@
 import { ProviderRpcClient } from 'everscale-inpage-provider';
 import { defineComponent, ref } from 'vue';
 
-import DisconnectIcon from './shared/DisconnectIcon.vue';
+import DisconnectIcon from './shared/BDKDisconnectIcon.vue';
 
 export default defineComponent({
-  name: 'WalletControl',
+  name: 'BDKWalletControl',
   components: {
     DisconnectIcon,
   },

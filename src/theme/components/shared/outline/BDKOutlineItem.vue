@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { nextTick } from 'vue';
+
 import { type MenuItem } from './outline';
 
 defineProps<{
@@ -9,16 +10,26 @@ defineProps<{
 
 const emit = defineEmits(['update-marker']);
 
-async function onClick({ target: el }: Event) {
-  const id = '#' + (el as HTMLAnchorElement).href!.split('#')[1];
+async function onClick(event: MouseEvent) {
+  const el = event.target as HTMLAnchorElement;
+  const id = '#' + el.href.split('#')[1];
   const heading = document.querySelector<HTMLAnchorElement>(decodeURIComponent(id));
-  console.log(heading);
   heading?.focus();
   await nextTick();
   emit('update-marker');
 }
 </script>
 
+<template>
+  <ul :class="root ? 'root' : 'nested'">
+    <li v-for="(item, index) in headers" :key="index">
+      <a class="outline-link" :href="item.link" :title="item.title" @click="onClick">{{ item.title }}</a>
+      <template v-if="item.children?.length">
+        <OutlineItem :headers="item.children" />
+      </template>
+    </li>
+  </ul>
+</template>
 <template>
   <ul :class="root ? 'root' : 'nested'">
     <li v-for="{ children, link, title } in headers">
