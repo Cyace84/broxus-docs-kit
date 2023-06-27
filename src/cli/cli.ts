@@ -1,7 +1,8 @@
-import fs from "fs";
-import { copySync } from "fs-extra";
-import path from "path";
-import fileConfig from "./source-map";
+import fs from 'fs';
+import { copySync } from 'fs-extra';
+import path from 'path';
+
+import fileConfig from './source-map';
 
 interface ConfigParams {
   docTitle: string;
@@ -14,11 +15,11 @@ interface ConfigParams {
   stylesPath: string;
 }
 export function createConfigFile(params: ConfigParams) {
-  const configUrl = path.join(params.folderName, ".vitepress/config.js");
-  let configFile = fs.readFileSync(configUrl, "utf8");
+  const configUrl = path.join(params.folderName, '.vitepress/config.js');
+  let configFile = fs.readFileSync(configUrl, 'utf8');
 
   for (const [key, value] of Object.entries(params)) {
-    configFile = configFile.replace(new RegExp(`{{${key}}}`, "g"), value);
+    configFile = configFile.replace(new RegExp(`{{${key}}}`, 'g'), value);
   }
 
   fs.writeFileSync(configUrl, configFile);
@@ -28,16 +29,32 @@ function copyFile(src: string, dest: string, mode: string) {
   const file = path.basename(src);
 
   if (file.endsWith(`.${mode}.js`) || file.endsWith(`.${mode}.scss`)) {
-    const newFileName = file.replace(`.${mode}`, ""); // Remove the mode from the filename.
+    const newFileName = file.replace(`.${mode}`, ''); // Remove the mode from the filename.
     fs.copyFileSync(src, path.join(dest, newFileName));
   } else if (
-    !file.endsWith(".full.js") &&
-    !file.endsWith(".light.js") &&
-    !file.endsWith(".full.scss") &&
-    !file.endsWith(".light.scss")
+    !file.endsWith('.full.js') &&
+    !file.endsWith('.light.js') &&
+    !file.endsWith('.full.scss') &&
+    !file.endsWith('.light.scss')
   ) {
     fs.copyFileSync(src, dest);
   }
+}
+
+function copyDirectory(src: string, dest: string, mode: string, copyRecursive: (src: string, dest: string) => void) {
+  fs.readdirSync(src).forEach(file => {
+    const srcFile = path.join(src, file);
+    const destFile = path.join(dest, file);
+
+    if (fs.statSync(srcFile).isDirectory()) {
+      if (!fs.existsSync(destFile)) {
+        fs.mkdirSync(destFile);
+      }
+      copyRecursive(srcFile, destFile);
+    } else {
+      copyFile(srcFile, destFile, mode);
+    }
+  });
 }
 
 async function copyAdditionalFiles(folderName: string) {
@@ -60,7 +77,7 @@ async function copyAdditionalFiles(folderName: string) {
 }
 
 export async function copyTemplateFiles(folderName: string, mode: string) {
-  const templatePath = path.join(__dirname, "../../src/template");
+  const templatePath = path.join(__dirname, '../../src/template');
 
   const copyRecursive = (src: string, dest: string) => {
     if (fs.statSync(src).isDirectory()) {
@@ -76,28 +93,7 @@ export async function copyTemplateFiles(folderName: string, mode: string) {
 
   copyRecursive(templatePath, folderName);
 
-  if (mode === "full") {
+  if (mode === 'full') {
     await copyAdditionalFiles(folderName);
   }
-}
-
-function copyDirectory(
-  src: string,
-  dest: string,
-  mode: string,
-  copyRecursive: (src: string, dest: string) => void
-) {
-  fs.readdirSync(src).forEach((file) => {
-    const srcFile = path.join(src, file);
-    const destFile = path.join(dest, file);
-
-    if (fs.statSync(srcFile).isDirectory()) {
-      if (!fs.existsSync(destFile)) {
-        fs.mkdirSync(destFile);
-      }
-      copyRecursive(srcFile, destFile);
-    } else {
-      copyFile(srcFile, destFile, mode);
-    }
-  });
 }

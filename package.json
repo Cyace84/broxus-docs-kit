@@ -6,7 +6,6 @@
   "repository": "https://github.com/cyace84/broxus-docs-kit",
   "author": "Valentyn Zavizion",
   "main": "dist/index.js",
-  "types": "./dist/cli/index.d.ts",
   "bin": {
     "broxus-docs-kit": "bin/broxus-docs-kit.js"
   },
@@ -17,7 +16,6 @@
     "/bin",
     "/dist",
     "/src/template",
-    "!/dist/.tsbuildinfo",
     "/LICENSE",
     "/package.json"
   ],
@@ -46,6 +44,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "escodegen": "^2.0.0",
     "eslint": "8.43.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.0",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.27.5",
@@ -58,6 +57,7 @@
     "typescript": "5.0.4",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.9",
+    "vitepress": "1.0.0-beta.3",
     "vue": "^3.3.4"
   }
 }
