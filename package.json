@@ -1,6 +1,6 @@
 {
   "name": "broxus-docs-kit-dev",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Broxus Docs Kit is a Vue.js and VitePress-based toolkit for streamlining Broxus project documentation. It offers ready-to-use templates and custom components, ensuring consistent, up-to-date, and clear documentation built on a user-friendly tech stack.",
   "license": "MIT",
   "repository": "https://github.com/cyace84/broxus-docs-kit",
