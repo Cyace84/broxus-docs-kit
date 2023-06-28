@@ -15,7 +15,7 @@ export interface ApiReferenceResponse {
   pagesHtml: Pages;
 }
 
-export async function getApiReference(projectName: string, targetPageName: string, nodeEnv: NodeEnv) {
+export async function getApiReference(projectName: string, targetPageName: string, nodeEnv: NodeEnv = 'prod') {
   const url = `${getApiUrl(nodeEnv)}?projectName=${encodeURIComponent(projectName)}`;
 
   const findPageByName = (pages: ApiRefPage[], pageName: string) => {
