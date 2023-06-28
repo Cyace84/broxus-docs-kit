@@ -6,6 +6,7 @@
     "docs:clean": "rm -rf ./docs/build",
     "docs:build": "npm run lint && npm run docs:clean && npx vitepress build",
     "lint": "eslint './**/*.{js,ts,jsx,tsx,vue}'",
+    "lint:fix": "eslint './**/*.{js,ts,jsx,tsx,vue}' --fix",
     "dev": "npx vitepress dev"
   },
   "dependencies": {
