@@ -1,6 +1,6 @@
 {
   "name": "broxus-docs-kit",
-  "version": "0.0.1",
+  "version": "1.0.0-dev.0",
   "description": "Broxus Docs Kit",
   "license": "MIT",
   "repository": "https://github.com/cyace84/broxus-docs-kit",
@@ -25,7 +25,8 @@
     "build:components": "node ./scripts/build-components.js",
     "build": "npm run build:clean && npm run build:tsc && npm run build:components",
     "bins": "node bin/broxus-docs-kit",
-    "lint": "eslint 'src/**/*.{js,ts,vue}'"
+    "lint": "eslint 'src/**/*.{js,ts,vue}'",
+    "lint:fix": "eslint 'src/**/*.{js,ts,vue}' --fix"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
