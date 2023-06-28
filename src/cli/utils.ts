@@ -30,7 +30,8 @@ function copyFile(src: string, dest: string, mode: string) {
 
   if (file.endsWith(`.${mode}.js`) || file.endsWith(`.${mode}.scss`)) {
     const newFileName = file.replace(`.${mode}`, ''); // Remove the mode from the filename.
-    fs.copyFileSync(src, path.join(dest, newFileName));
+    const newDestPath = path.join(path.dirname(dest), newFileName);
+    fs.copyFileSync(src, newDestPath);
   } else if (
     !file.endsWith('.full.js') &&
     !file.endsWith('.light.js') &&
@@ -45,7 +46,13 @@ function copyRecursive(src: string, dest: string, mode: string) {
   const copyDirectory = () => {
     fs.readdirSync(src).forEach(file => {
       const srcFile = path.join(src, file);
-      const destFile = path.join(dest, file);
+      let destFile;
+      if (file.endsWith('.light.js')) {
+        const newFileName = file.replace('.light.js', '.js');
+        destFile = path.join(dest, newFileName);
+      } else {
+        destFile = path.join(dest, file);
+      }
 
       if (fs.statSync(srcFile).isDirectory()) {
         if (!fs.existsSync(destFile)) {
@@ -85,7 +92,7 @@ async function copyAdditionalFiles(folderName: string) {
 }
 
 export async function copyTemplateFiles(folderName: string, mode: string) {
-  const templatePath = path.join(__dirname, '../../../template');
+  const templatePath = path.join(__dirname, '../../template');
 
   if (!fs.existsSync(folderName)) {
     fs.mkdirSync(folderName);

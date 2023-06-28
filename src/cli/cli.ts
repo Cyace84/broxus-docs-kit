@@ -64,22 +64,6 @@ async function main() {
     },
   ]);
 
-  if (fs.existsSync(response.folderName)) {
-    const continueResponse = await prompts([
-      {
-        type: 'confirm',
-        name: 'continue',
-        message: `Directory ${response.folderName} already exists and is not empty. Continuing may overwrite existing files. Do you want to continue?`,
-        initial: false,
-      },
-    ]);
-    if (!continueResponse.continue) {
-      // eslint-disable-next-line no-console
-      console.log('Operation cancelled by user. Exiting...');
-      process.exit(0);
-    }
-  }
-
   let HELP_URL = 'https://t.me/everdev';
   let FEEDBACK_URL = '';
   let GITHUB_URL = packageJson.repository || '';
@@ -109,9 +93,26 @@ async function main() {
     HELP_URL = linkResponse.HELP_URL;
   }
 
+  if (fs.existsSync(response.folderName)) {
+    const continueResponse = await prompts([
+      {
+        type: 'confirm',
+        name: 'continue',
+        message: `Directory ${response.folderName} already exists and is not empty. Continuing may overwrite existing files. Do you want to continue?`,
+        initial: false,
+      },
+    ]);
+    if (!continueResponse.continue) {
+      // eslint-disable-next-line no-console
+      console.log('Operation cancelled by user. Exiting...');
+      process.exit(0);
+    }
+  }
+
   const { docTitle, projectName, mode, folderName } = response;
 
   console.log(
+    '\n',
     '\x1b[1m🚀 Creating\x1b[0m',
     '\x1b[1m' + mode + '\x1b[0m',
     '\x1b[1mmode documentation for project\x1b[0m',
