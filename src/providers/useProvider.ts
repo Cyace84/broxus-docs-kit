@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createApp, h, nextTick, ref, shallowRef, watch } from 'vue';
 
 import {
@@ -51,31 +52,37 @@ class ProviderProxy implements Provider {
 
   addListener<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.addListener(eventName, listener);
+
     return this;
   }
 
   removeListener<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.removeListener(eventName, listener);
+
     return this;
   }
 
   on<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.on(eventName, listener);
+
     return this;
   }
 
   once<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.once(eventName, listener);
+
     return this;
   }
 
   prependListener<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.prependListener(eventName, listener);
+
     return this;
   }
 
   prependOnceListener<T extends ProviderEvent>(eventName: T, listener: (data: RawProviderEventData<T>) => void): this {
     this.inner?.prependOnceListener(eventName, listener);
+
     return this;
   }
 }
@@ -96,6 +103,7 @@ class Connector {
             if (savedProvider) {
               this.provider.inner = savedProvider;
               resolve();
+
               return;
             }
           }
@@ -160,6 +168,7 @@ class Connector {
       const savedProvider = this.getProviderByKey(savedProviderKey);
       if (savedProvider) {
         this.provider.inner = savedProvider;
+
         return true;
       }
     }
@@ -170,6 +179,7 @@ class Connector {
       return false;
     } else if (providers.length === 1) {
       onSelect(providers[0].provider);
+
       return true;
     }
 

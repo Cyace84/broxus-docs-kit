@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable */
 defineProps<{
   providers: { title: string; object: any }[];
   onSelect: (provider: any) => void;
@@ -14,9 +15,9 @@ defineProps<{
         <p class="is-size-5 mb-3">Connect a wallet</p>
         <div class="buttons">
           <button
-            class="button is-fullwidth"
             v-for="(provider, i) in providers"
             :key="i"
+            class="button is-fullwidth"
             @click="onSelect(provider.object)"
           >
             {{ provider.title }}

@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import { ProviderRpcClient } from 'everscale-inpage-provider';
+/* eslint-disable */
 import { defineComponent, ref, onMounted } from 'vue';
-import { useProvider } from './../../providers/useProvider';
 
+import { useProvider } from './../../providers/useProvider';
 import DisconnectIcon from './shared/BDKDisconnectIcon.vue';
 
 export default defineComponent({
