@@ -1,7 +1,7 @@
 <template>
   <div class="walletControl">
-    <button v-if="connected" @click="changeAccount">Change Account</button>
-    <button v-if="connected" class="disconnectBtn" @click="disconnect">
+    <button v-if="connected" @click="changeAccountWallet">Change Account</button>
+    <button v-if="connected" class="disconnectBtn" @click="disconnectWallet">
       <DisconnectIcon :size="16" />
     </button>
     <button v-else @click="requestPermissions">Connect</button>
@@ -10,43 +10,46 @@
 
 <script lang="ts">
 import { ProviderRpcClient } from 'everscale-inpage-provider';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+import { useProvider } from './../../providers/useProvider';
 
 import DisconnectIcon from './shared/BDKDisconnectIcon.vue';
 
 export default defineComponent({
-  name: 'BDKWalletControl',
+  name: 'WalletControl',
   components: {
     DisconnectIcon,
   },
-  async setup() {
+  setup() {
+    const { provider, connectToWallet, changeAccount, disconnect } = useProvider();
+
     const connected = ref(false);
 
-    const provider = new ProviderRpcClient();
-    provider.subscribe('permissionsChanged').then(subscription => {
-      subscription.on('data', permissions => {
-        connected.value = !!permissions.permissions;
+    onMounted(async () => {
+      const subscription = await provider.subscribe('permissionsChanged');
+      subscription.on('data', (permissions: any) => {
+        connected.value = permissions.permissions.accountInteraction == null;
       });
+
+      const providerState = await provider.getProviderState();
+      connected.value = !!providerState.permissions.accountInteraction == null;
     });
 
-    const providerState = await provider.getProviderState();
-    connected.value = !!providerState.permissions;
+    const requestPermissions = async () => {
+      await connectToWallet();
+      connected.value = true;
+    };
 
-    return { connected, provider };
-  },
-  methods: {
-    async requestPermissions() {
-      await this.provider.requestPermissions({
-        permissions: ['basic', 'accountInteraction'],
-      });
-    },
-    async disconnect() {
-      await this.provider.disconnect();
-      this.connected = false;
-    },
-    async changeAccount() {
-      await this.provider.changeAccount();
-    },
+    const disconnectWallet = async () => {
+      await disconnect();
+      connected.value = false;
+    };
+
+    const changeAccountWallet = async () => {
+      await changeAccount();
+    };
+
+    return { connected, requestPermissions, disconnectWallet, changeAccountWallet };
   },
 });
 </script>
