@@ -3,6 +3,7 @@ import path from 'path';
 import prompts from 'prompts';
 import tty from 'tty';
 import { copyTemplateFiles, createConfigFile } from './utils';
+import { exec } from 'child_process';
 
 if (tty.isatty(0)) {
   process.stdin.setRawMode(true);
@@ -137,7 +138,24 @@ async function main() {
     stylesPath: mode === 'light' ? 'broxus-docs-kit/dist/theme/styles' : './theme/styles',
   });
 
-  console.log('\n✅ Done!');
+  console.log(
+    '\n',
+    '\x1b[1m\x1b[32m%s\x1b[0m',
+    '🚀 Initiating dependencies installation... This may take a while, depending on your internet speed and computer power.'
+  );
+
+  exec('npm install', { cwd: folderName }, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.error(`Error: ${stderr}`);
+      return;
+    }
+    console.log(`Output: ${stdout}`);
+  });
+  console.log('\x1b[1m\x1b[32m%s\x1b[0m', '\n✅ Done! Your project is ready for lift off!');
 }
 
 main().catch(error => {
