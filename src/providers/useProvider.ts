@@ -13,7 +13,7 @@ import {
   RawProviderEventData,
 } from 'everscale-inpage-provider';
 
-import ProviderSelector from '../components/ProviderSelector.vue';
+import ProviderSelector from '../theme/components/ProviderSelector.vue';
 
 type ConnectorWallet = {
   title: string;

@@ -3,6 +3,7 @@ import { copySync } from 'fs-extra';
 import path from 'path';
 
 import fileConfig from './source-map';
+const TEMPLATE_PATH = path.join(__dirname, '../../template');
 
 interface ConfigParams {
   docTitle: string;
@@ -11,7 +12,6 @@ interface ConfigParams {
   HELP_URL: string;
   FEEDBACK_URL: string;
   GITHUB_URL: string;
-  componentsPath: string;
   stylesPath: string;
 }
 export function createConfigFile(params: ConfigParams) {
@@ -79,6 +79,7 @@ async function copyAdditionalFiles(folderName: string) {
 
     const srcStats = fs.lstatSync(src);
     if (srcStats.isSymbolicLink()) {
+      // TODO document why this block is empty
     } else if (srcStats.isDirectory()) {
       copySync(src, dest);
     } else {
@@ -92,13 +93,11 @@ async function copyAdditionalFiles(folderName: string) {
 }
 
 export async function copyTemplateFiles(folderName: string, mode: string) {
-  const templatePath = path.join(__dirname, '../../template');
-
   if (!fs.existsSync(folderName)) {
     fs.mkdirSync(folderName);
   }
 
-  copyRecursive(templatePath, folderName, mode);
+  copyRecursive(TEMPLATE_PATH, folderName, mode);
 
   if (mode === 'full') {
     await copyAdditionalFiles(folderName);

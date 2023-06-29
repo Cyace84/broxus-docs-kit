@@ -63,7 +63,7 @@ In this component, we have two input fields to take user's name and age. The dat
 Then, register your component globally in the VitePress theme. You can do this in the `.vitepress/theme/index.js` file:
 
 ```javascript
-import BroxusTheme from 'broxus-docs-kit/theme/broxusTheme';
+import BroxusTheme from 'broxus-docs-kit-dev/theme/broxusTheme';
 import PackDataSample from '@components/demos/PackDataSample.vue';
 
 export default {

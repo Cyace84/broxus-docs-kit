@@ -1,9 +1,10 @@
+import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import prompts from 'prompts';
 import tty from 'tty';
+
 import { copyTemplateFiles, createConfigFile } from './utils';
-import { exec } from 'child_process';
 
 if (tty.isatty(0)) {
   process.stdin.setRawMode(true);
@@ -111,7 +112,7 @@ async function main() {
   }
 
   const { docTitle, projectName, mode, folderName } = response;
-
+  // eslint-disable-next-line no-console
   console.log(
     '\n',
     '\x1b[1m🚀 Creating\x1b[0m',
@@ -134,10 +135,10 @@ async function main() {
     HELP_URL: HELP_URL,
     FEEDBACK_URL: FEEDBACK_URL,
     GITHUB_URL: GITHUB_URL,
-    componentsPath: mode === 'light' ? 'broxus-docs-kit/dist/theme/components' : './theme/components',
-    stylesPath: mode === 'light' ? 'broxus-docs-kit/dist/theme/styles' : './theme/styles',
+    stylesPath: mode === 'light' ? 'broxus-docs-kit-dev/dist/theme/styles' : './theme/styles',
   });
 
+  // eslint-disable-next-line no-console
   console.log(
     '\n',
     '\x1b[1m\x1b[32m%s\x1b[0m',
@@ -146,19 +147,26 @@ async function main() {
 
   exec('npm install', { cwd: folderName }, (error, stdout, stderr) => {
     if (error) {
+      // eslint-disable-next-line no-console
       console.error(`Error: ${error.message}`);
+
       return;
     }
     if (stderr) {
+      // eslint-disable-next-line no-console
       console.error(`Error: ${stderr}`);
+
       return;
     }
+    // eslint-disable-next-line no-console
     console.log(`Output: ${stdout}`);
   });
+  // eslint-disable-next-line no-console
   console.log('\x1b[1m\x1b[32m%s\x1b[0m', '\n✅ Done! Your project is ready for lift off!');
 }
 
 main().catch(error => {
+  // eslint-disable-next-line no-console
   console.error(error);
   process.exit(1);
 });

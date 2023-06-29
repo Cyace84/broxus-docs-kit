@@ -12,11 +12,14 @@ function copyFileSync(source, target) {
     }
   }
 
-  try {
-    fs.writeFileSync(targetFile, fs.readFileSync(source));
-  } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
+  const extension = path.extname(source);
+  if (extension === '.vue' || extension === '.scss' || extension === '.css') {
+    try {
+      fs.writeFileSync(targetFile, fs.readFileSync(source));
+    } catch (err) {
+      console.error(err);
+      process.exitCode = 1;
+    }
   }
 }
 
@@ -45,10 +48,12 @@ function copyFolderRecursiveSync(source, target) {
       console.error(err);
       process.exitCode = 1;
     }
+  } else {
+    copyFileSync(source, target);
   }
 }
 
-const sources = ['src/theme/components', 'src/theme/styles'];
-const target = tsConfig.compilerOptions.outDir;
+const sources = ['src/theme/components', 'src/theme/styles', 'src/theme/main.scss'];
+const target = path.join(tsConfig.compilerOptions.outDir, 'theme');
 
 sources.forEach(source => copyFolderRecursiveSync(source, target));

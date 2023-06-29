@@ -10,12 +10,14 @@
     "broxus-docs-kit-dev": "bin/broxus-docs-kit"
   },
   "exports": {
-    "./theme": "./src/theme/broxusTheme.js"
+    ".": "./dist/index.js",
+    "./styles": "./dist/styles/"
   },
   "files": [
     "/bin",
     "/dist",
-    "template",
+    "/src",
+    "/template",
     "/LICENSE",
     "/package.json"
   ],
@@ -23,7 +25,7 @@
     "build:clean": "rm -rf dist",
     "build:tsc": "tsc",
     "build:components": "node ./scripts/build-components.js",
-    "build": "npm run build:clean && npm run build:tsc && npm run build:components",
+    "build": "npm run lint && npm run build:clean && npm run build:tsc && npm run build:components",
     "lint": "eslint 'src/**/*.{js,ts,vue}'",
     "lint:fix": "eslint 'src/**/*.{js,ts,vue}' --fix"
   },

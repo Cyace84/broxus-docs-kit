@@ -14,7 +14,6 @@ module.exports = {
   plugins: [vue(), Components({ dst: true })],
   resolve: {
     alias: {
-      '@themeComponents': resolve(__dirname, '{{componentsPath}}'),
       '@themeStyles': resolve(__dirname, '{{stylesPath}}'),
       '@components': './../src/components',
       '@styles': './../src/styles',

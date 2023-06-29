@@ -30,16 +30,6 @@ async function onClick(event: MouseEvent) {
     </li>
   </ul>
 </template>
-<template>
-  <ul :class="root ? 'root' : 'nested'">
-    <li v-for="{ children, link, title } in headers">
-      <a class="outline-link" :href="link" :title="title" @click="onClick">{{ title }}</a>
-      <template v-if="children?.length">
-        <OutlineItem :headers="children" />
-      </template>
-    </li>
-  </ul>
-</template>
 
 <style scoped>
 .root {
