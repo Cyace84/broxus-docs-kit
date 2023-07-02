@@ -1,6 +1,6 @@
 {
   "name": "broxus-docs-kit-dev",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Broxus Docs Kit is a Vue.js and VitePress-based toolkit for streamlining Broxus project documentation. It offers ready-to-use templates and custom components, ensuring consistent, up-to-date, and clear documentation built on a user-friendly tech stack.",
   "license": "MIT",
   "repository": "https://github.com/cyace84/broxus-docs-kit",
@@ -11,6 +11,7 @@
   },
   "exports": {
     ".": "./dist/index.js",
+    "./dist/cli/cli": "./dist/cli/cli.js",
     "./styles": "./dist/styles/"
   },
   "files": [
@@ -25,7 +26,8 @@
     "build:clean": "rm -rf dist",
     "build:tsc": "tsc",
     "build:components": "node ./scripts/build-components.js",
-    "build": "npm run lint && npm run build:clean && npm run build:tsc && npm run build:components",
+    "build": "npm run lint && npm run build:clean && npm run build:tsc && npm run build:rollup",
+    "build:rollup": "rollup -c",
     "lint": "eslint 'src/**/*.{js,ts,vue}'",
     "lint:fix": "eslint 'src/**/*.{js,ts,vue}' --fix"
   },
@@ -41,14 +43,21 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@rollup/plugin-alias": "^5.0.0",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.1.2",
     "@types/escodegen": "^0.0.7",
     "@types/esprima": "^4.0.3",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash": "^4.14.195",
     "@types/node": "^20.3.1",
     "@types/prompts": "^2.4.4",
+    "@types/rollup-plugin-css-only": "^3.1.0",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@vitejs/plugin-vue": "^4.2.3",
     "escodegen": "^2.0.0",
     "eslint": "8.43.0",
     "eslint-config-prettier": "^8.8.0",
@@ -59,6 +68,12 @@
     "eslint-plugin-sonarjs": "^0.19.0",
     "eslint-plugin-vue": "^9.15.1",
     "rollup": "^3.25.1",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-scss": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.63.6",
     "typescript": "5.0.4"
   }

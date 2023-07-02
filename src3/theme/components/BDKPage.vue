@@ -9,7 +9,7 @@
 import { defineComponent, ref, onMounted, nextTick } from 'vue';
 
 import { getApiReference } from './../../api';
-import { NodeEnv } from './../../config';
+//import { NodeEnv } from './../../config';
 
 interface ApiResponse {
   content: string;
@@ -27,7 +27,7 @@ export default defineComponent({
       default: '',
     },
     nodeEnv: {
-      type: String as () => NodeEnv,
+      type: String,
       default: 'local',
     },
   },

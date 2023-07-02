@@ -2,7 +2,7 @@ import fs from 'fs';
 import { copySync } from 'fs-extra';
 import path from 'path';
 
-import fileConfig from './source-map.js';
+import fileConfig from './source-map';
 const TEMPLATE_PATH = path.join(__dirname, '../../template');
 
 interface ConfigParams {
@@ -12,6 +12,7 @@ interface ConfigParams {
   HELP_URL: string;
   FEEDBACK_URL: string;
   GITHUB_URL: string;
+  stylesPath: string;
 }
 export function createConfigFile(params: ConfigParams) {
   const configUrl = path.join(params.folderName, '.vitepress/config.js');

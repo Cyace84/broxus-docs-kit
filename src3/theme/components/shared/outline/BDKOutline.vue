@@ -3,11 +3,13 @@ import { useData, type DefaultTheme } from 'vitepress';
 import { ref, shallowRef, watch, nextTick } from 'vue';
 
 import OutlineItem from './BDKOutlineItem.vue';
-import { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor, type MenuItem } from './outline';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+const { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor, MenuItem } = require('./outline');
 
 const { frontmatter, theme } = useData();
 
-const headers = shallowRef<MenuItem[]>([]);
+const headers = shallowRef<(typeof MenuItem)[]>([]);
 
 const container = ref();
 const marker = ref();

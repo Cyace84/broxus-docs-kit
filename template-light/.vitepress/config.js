@@ -1,4 +1,6 @@
 import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
+import Components from 'unplugin-vue-components/vite';
 
 const HELP_URL = '{{HELP_URL}}';
 const FEEDBACK_URL = '{{FEEDBACK_URL}}';
@@ -6,10 +8,17 @@ const GITHUB_URL = '{{GITHUB_URL}}';
 
 module.exports = {
   title: '{{docTitle}}',
-  base: '/',
+  base: '',
   description: '{{projectName}}',
 
-  plugins: [vue()],
+  plugins: [vue(), Components({ dst: true })],
+  resolve: {
+    alias: {
+      '@themeStyles': resolve(__dirname, '{{stylesPath}}'),
+      '@components': './../src/components',
+      '@styles': './../src/styles',
+    },
+  },
   themeConfig: {
     search: {
       provider: 'local',

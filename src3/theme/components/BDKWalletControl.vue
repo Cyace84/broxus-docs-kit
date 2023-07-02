@@ -12,8 +12,9 @@
 /* eslint-disable */
 import { defineComponent, ref, onMounted } from 'vue';
 
-import { useProvider } from './../../providers/useProvider';
 import DisconnectIcon from './shared/BDKDisconnectIcon.vue';
+
+const { useProvider } = require('./../../providers/useProvider');
 
 export default defineComponent({
   name: 'WalletControl',

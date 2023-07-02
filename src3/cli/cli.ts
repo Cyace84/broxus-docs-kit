@@ -4,7 +4,7 @@ import path from 'path';
 import prompts from 'prompts';
 import tty from 'tty';
 
-import { copyTemplateFiles, createConfigFile } from './utils.js';
+import { copyTemplateFiles, createConfigFile } from './utils';
 
 if (tty.isatty(0)) {
   process.stdin.setRawMode(true);
@@ -33,25 +33,25 @@ async function main() {
       message: 'Enter the name of the project to be documented',
       initial: packageJson.name || '',
     },
-    // {
-    //   type: 'select',
-    //   name: 'mode',
-    //   message: 'Choose your mode',
-    //   choices: [
-    //     {
-    //       title: 'Light',
-    //       description: 'In Light mode, key components and styles will be imported from node modules.',
-    //       value: 'light',
-    //     },
-    //     {
-    //       title: 'Full',
-    //       description:
-    //         'In Full mode, everything will be installed in the user directory, but you must then keep track of updates yourself.',
-    //       value: 'full',
-    //     },
-    //   ],
-    //   initial: 0,
-    // },
+    {
+      type: 'select',
+      name: 'mode',
+      message: 'Choose your mode',
+      choices: [
+        {
+          title: 'Light',
+          description: 'In Light mode, key components and styles will be imported from node modules.',
+          value: 'light',
+        },
+        {
+          title: 'Full',
+          description:
+            'In Full mode, everything will be installed in the user directory, but you must then keep track of updates yourself.',
+          value: 'full',
+        },
+      ],
+      initial: 0,
+    },
     {
       type: 'text',
       name: 'folderName',
@@ -111,8 +111,7 @@ async function main() {
     }
   }
 
-  const { docTitle, projectName, folderName } = response;
-  const mode = 'full';
+  const { docTitle, projectName, mode, folderName } = response;
   // eslint-disable-next-line no-console
   console.log(
     '\n',
@@ -136,12 +135,13 @@ async function main() {
     HELP_URL: HELP_URL,
     FEEDBACK_URL: FEEDBACK_URL,
     GITHUB_URL: GITHUB_URL,
+    stylesPath: mode === 'light' ? 'broxus-docs-kit-dev/dist/theme/styles' : './theme/styles',
   });
 
   // eslint-disable-next-line no-console
   console.log(
     '\n',
-    '\x1b[1m\x1b[0m',
+    '\x1b[1m\x1b[32m%s\x1b[0m',
     '🚀 Initiating dependencies installation... This may take a while, depending on your internet speed and computer power.'
   );
 
@@ -163,7 +163,6 @@ async function main() {
   });
   // eslint-disable-next-line no-console
   console.log('\x1b[1m\x1b[32m%s\x1b[0m', '\n✅ Done! Your project is ready for lift off!');
-  process.exit(0);
 }
 
 main().catch(error => {
