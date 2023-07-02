@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Before you get started, please ensure that you have Node.js installed on your machine. In order to guarantee the successful execution of this package, it's highly recommended to use Node.js version 16.14.2 or higher. You can check your Node.js version by running `node -v` in your terminal.
+Before you get started, please ensure that you have Node.js installed on your machine. In order to guarantee the successful execution of this package, it's highly recommended to use Node.js version 16.14.0 || >=18.0.0. You can check your Node.js version by running `node -v` in your terminal.
 
 If you need to install or update Node.js, visit the [official website](https://nodejs.org/) for download instructions. If you need to manage multiple versions of Node.js on your machine, consider using a version manager like [nvm](https://github.com/nvm-sh/nvm) or [n](https://github.com/tj/n).
 
