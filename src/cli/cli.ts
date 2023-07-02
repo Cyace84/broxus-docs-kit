@@ -155,15 +155,12 @@ async function main() {
     if (stderr) {
       // eslint-disable-next-line no-console
       console.error(`Error: ${stderr}`);
-
-      return;
     }
     // eslint-disable-next-line no-console
     console.log(`Output: ${stdout}`);
+    // eslint-disable-next-line no-console
+    console.log('\x1b[1m\x1b[32m%s\x1b[0m', '\n✅ Done! Your project is ready for lift off!');
   });
-  // eslint-disable-next-line no-console
-  console.log('\x1b[1m\x1b[32m%s\x1b[0m', '\n✅ Done! Your project is ready for lift off!');
-  process.exit(0);
 }
 
 main().catch(error => {

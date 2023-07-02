@@ -42,11 +42,13 @@ export default defineComponent({
 
       await nextTick();
 
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.getElementById(hash.substring(1));
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+      if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+        const hash = window.location.hash;
+        if (hash) {
+          const element = document.getElementById(hash.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       }
     });

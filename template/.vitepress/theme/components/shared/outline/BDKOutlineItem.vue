@@ -11,6 +11,10 @@ defineProps<{
 const emit = defineEmits(['update-marker']);
 
 async function onClick(event: MouseEvent) {
+  if (typeof document === 'undefined') {
+    return;
+  }
+
   const el = event.target as HTMLAnchorElement;
   const id = '#' + el.href.split('#')[1];
   const heading = document.querySelector<HTMLAnchorElement>(decodeURIComponent(id));
@@ -23,7 +27,9 @@ async function onClick(event: MouseEvent) {
 <template>
   <ul :class="root ? 'root' : 'nested'">
     <li v-for="(item, index) in headers" :key="index">
-      <a class="outline-link" :href="item.link" :title="item.title" @click="onClick">{{ item.title }}</a>
+      <a class="outline-link" :href="item.link" :title="item.title" @click="onClick">{{
+        item.title
+      }}</a>
       <template v-if="item.children?.length">
         <OutlineItem :headers="item.children" />
       </template>

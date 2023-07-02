@@ -37,6 +37,9 @@ function copyFile(src: string, dest: string, mode: string) {
     !file.endsWith('.full.scss') &&
     !file.endsWith('.light.scss')
   ) {
+    if (file === 'gitignore') {
+      dest = path.join(path.dirname(dest), '.gitignore');
+    }
     fs.copyFileSync(src, dest);
   }
 }

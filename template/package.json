@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "clean:docs": "rm -rf ./docs/build",
-    "build:docs": "npm run lint && npm run docs:clean && npx vitepress build",
+    "build:docs": "npm run lint && npm run clean:docs && npx vitepress build",
     "lint": "eslint './**/*.{js,ts,jsx,tsx,vue}'",
     "lint:fix": "eslint './**/*.{js,ts,jsx,tsx,vue}' --fix",
     "dev": "npx vitepress dev"

@@ -5,7 +5,13 @@ import { ref, shallowRef, watch, nextTick } from 'vue';
 import OutlineItem from './BDKOutlineItem.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-const { serializeHeader, resolveHeaders, resolveTitle, useActiveAnchor, MenuItem } = require('./outline');
+const {
+  serializeHeader,
+  resolveHeaders,
+  resolveTitle,
+  useActiveAnchor,
+  MenuItem,
+} = require('./outline');
 
 const { frontmatter, theme } = useData();
 
@@ -20,7 +26,12 @@ const props = defineProps<{
   content: string | undefined;
 }>();
 
-const getHeaders = (range: number | false | DefaultTheme.Outline | [number, number] | 'deep' | undefined) => {
+const getHeaders = (
+  range: number | false | DefaultTheme.Outline | [number, number] | 'deep' | undefined
+) => {
+  if (typeof document === 'undefined') {
+    return [];
+  }
   const _headers = Array.from(document.querySelectorAll('h2,h3,h4,h5,h6'))
     .filter(el => el.id && el.hasChildNodes())
     .map(el => {
@@ -63,7 +74,9 @@ watch(
       </div>
 
       <nav aria-labelledby="doc-outline-aria-label">
-        <span id="doc-outline-aria-label" class="visually-hidden"> Table of Contents for current page </span>
+        <span id="doc-outline-aria-label" class="visually-hidden">
+          Table of Contents for current page
+        </span>
         <OutlineItem :headers="headers" :root="true" />
       </nav>
     </div>

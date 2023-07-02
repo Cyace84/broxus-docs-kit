@@ -29,14 +29,21 @@ type ConnectorParams = {
 };
 
 let ensurePageLoaded: Promise<void>;
-if (document.readyState === 'complete') {
-  ensurePageLoaded = Promise.resolve();
-} else {
-  ensurePageLoaded = new Promise<void>(resolve => {
-    window.addEventListener('load', () => {
-      resolve();
+
+if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+  if (document.readyState === 'complete') {
+    ensurePageLoaded = Promise.resolve();
+  } else {
+    ensurePageLoaded = new Promise<void>(resolve => {
+      window.addEventListener('load', () => {
+        resolve();
+      });
     });
-  });
+  }
+} else {
+  // Provide a default value when document and window are not available
+  // You might want to adjust this part based on your use case
+  ensurePageLoaded = Promise.resolve();
 }
 
 class ProviderProxy implements Provider {
@@ -226,6 +233,10 @@ class Connector {
     });
 
     nextTick(() => {
+      if (typeof document === 'undefined') {
+        return;
+      }
+
       let appContainer = document.getElementById('app');
 
       if (appContainer) {
@@ -240,6 +251,10 @@ class Connector {
 
   getProviders(): { provider: Provider; wallet: ConnectorWallet }[] {
     const providers = new Array<{ provider: Provider; wallet: ConnectorWallet }>();
+
+    if (typeof window === 'undefined') {
+      return providers;
+    }
 
     for (const wallet of this.params.supportedWallets) {
       const object = wallet.injected.object;
@@ -256,6 +271,10 @@ class Connector {
   }
 
   setCookie(name: string, value: string, days: number) {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
     let expires = '';
     if (days) {
       let date = new Date();
@@ -266,6 +285,10 @@ class Connector {
   }
 
   getCookie(name: string) {
+    if (typeof document === 'undefined') {
+      return null;
+    }
+
     let nameEQ = name + '=';
     let ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {

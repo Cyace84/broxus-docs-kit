@@ -35,8 +35,14 @@ export function serializeHeader(h: Element) {
   return ret.trim();
 }
 
-function filterHeadersByRange(headers: MenuItem[], high: number | undefined, low: number | undefined): MenuItem[] {
-  return headers.filter(h => (high === undefined || h.level >= high) && (low === undefined || h.level <= low));
+function filterHeadersByRange(
+  headers: MenuItem[],
+  high: number | undefined,
+  low: number | undefined
+): MenuItem[] {
+  return headers.filter(
+    h => (high === undefined || h.level >= high) && (low === undefined || h.level <= low)
+  );
 }
 
 function calculateRangeLevels(range: DefaultTheme.Config['outline']): {
@@ -65,7 +71,10 @@ function addToParentOrRoot(headers: MenuItem[], cur: MenuItem): boolean {
   return false;
 }
 
-export function resolveHeaders(headers: MenuItem[], range?: DefaultTheme.Config['outline']): MenuItem[] {
+export function resolveHeaders(
+  headers: MenuItem[],
+  range?: DefaultTheme.Config['outline']
+): MenuItem[] {
   if (range === false) {
     return [];
   }
@@ -145,11 +154,19 @@ function setActiveLink(
   isAsideEnabled: Ref<boolean>,
   prevActiveLink: HTMLAnchorElement | null
 ) {
-  if (!isAsideEnabled.value) {
+  if (
+    typeof document === 'undefined' ||
+    typeof window === 'undefined' ||
+    !container.value ||
+    !marker.value ||
+    !isAsideEnabled.value
+  ) {
     return;
   }
 
-  const links = [].slice.call(container.value.querySelectorAll('.outline-link')) as HTMLAnchorElement[];
+  const links = [].slice.call(
+    container.value.querySelectorAll('.outline-link')
+  ) as HTMLAnchorElement[];
 
   const anchors = [].slice
     .call(document.querySelectorAll('.content .header-anchor'))
@@ -167,19 +184,16 @@ function setActiveLink(
   // page bottom - highlight last one
   if (anchors.length && isBottom) {
     activateLink(anchors[anchors.length - 1].hash, container, marker, prevActiveLink);
-
     return;
   }
 
   for (let i = 0; i < anchors.length; i++) {
     const anchor = anchors[i];
     const nextAnchor = anchors[i + 1];
-
     const [isActive, hash] = isAnchorActive(i, anchor, nextAnchor);
 
     if (isActive) {
       activateLink(hash, container, marker, prevActiveLink);
-
       return;
     }
   }
@@ -188,7 +202,10 @@ function setActiveLink(
 export function useActiveAnchor(container: Ref<HTMLElement>, marker: Ref<HTMLElement>) {
   const { isAsideEnabled } = useAside();
   const prevActiveLink: HTMLAnchorElement | null = null;
-  const onScroll = throttleAndDebounce(() => setActiveLink(container, marker, isAsideEnabled, prevActiveLink), 100);
+  const onScroll = throttleAndDebounce(
+    () => setActiveLink(container, marker, isAsideEnabled, prevActiveLink),
+    100
+  );
 
   onMounted(() => {
     requestAnimationFrame(() => setActiveLink(container, marker, isAsideEnabled, prevActiveLink));
