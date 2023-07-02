@@ -18,7 +18,7 @@ npm install --save-dev broxus-docs-kit-dev
 npx broxus-docs-kit-dev
 ```
 
-![Alt text](image.png)
+![Alt text](image-2.png)
 
 ## Template
 
