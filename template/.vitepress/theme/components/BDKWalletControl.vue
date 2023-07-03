@@ -29,11 +29,12 @@ export default defineComponent({
     onMounted(async () => {
       const subscription = await provider.subscribe('permissionsChanged');
       subscription.on('data', (permissions: any) => {
-        connected.value = permissions.permissions.accountInteraction == null;
+        connected.value = !!providerState.permissions.accountInteraction;
       });
 
       const providerState = await provider.getProviderState();
-      connected.value = !!providerState.permissions.accountInteraction == null;
+
+      connected.value = !!providerState.permissions.accountInteraction;
     });
 
     const requestPermissions = async () => {
