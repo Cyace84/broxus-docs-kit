@@ -29,7 +29,7 @@ export default defineComponent({
     onMounted(async () => {
       const subscription = await provider.subscribe('permissionsChanged');
       subscription.on('data', (permissions: any) => {
-        connected.value = !!providerState.permissions.accountInteraction;
+        connected.value = !!permissions.permissions.accountInteraction;
       });
 
       const providerState = await provider.getProviderState();
@@ -39,6 +39,7 @@ export default defineComponent({
 
     const requestPermissions = async () => {
       await connectToWallet();
+
       connected.value = true;
     };
 
