@@ -21,6 +21,7 @@ export default defineComponent({
   components: {
     DisconnectIcon,
   },
+
   setup() {
     const { provider, connectToWallet, changeAccount, disconnect } = useProvider();
 
@@ -41,6 +42,7 @@ export default defineComponent({
       await connectToWallet();
 
       connected.value = true;
+      location.reload();
     };
 
     const disconnectWallet = async () => {
