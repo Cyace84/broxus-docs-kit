@@ -33,25 +33,25 @@ async function main() {
       message: 'Enter the name of the project to be documented',
       initial: packageJson.name || '',
     },
-    // {
-    //   type: 'select',
-    //   name: 'mode',
-    //   message: 'Choose your mode',
-    //   choices: [
-    //     {
-    //       title: 'Light',
-    //       description: 'In Light mode, key components and styles will be imported from node modules.',
-    //       value: 'light',
-    //     },
-    //     {
-    //       title: 'Full',
-    //       description:
-    //         'In Full mode, everything will be installed in the user directory, but you must then keep track of updates yourself.',
-    //       value: 'full',
-    //     },
-    //   ],
-    //   initial: 0,
-    // },
+    {
+      type: 'select',
+      name: 'mode',
+      message: 'Choose your mode',
+      choices: [
+        {
+          title: 'Light',
+          description: 'In Light mode, key components and styles will be imported from node modules.',
+          value: 'light',
+        },
+        {
+          title: 'Full',
+          description:
+            'In Full mode, everything will be installed in the user directory, but you must then keep track of updates yourself.',
+          value: 'full',
+        },
+      ],
+      initial: 0,
+    },
     {
       type: 'text',
       name: 'folderName',
@@ -111,8 +111,7 @@ async function main() {
     }
   }
 
-  const { docTitle, projectName, folderName } = response;
-  const mode = 'full';
+  const { docTitle, projectName, folderName, mode } = response;
   // eslint-disable-next-line no-console
   console.log(
     '\n',

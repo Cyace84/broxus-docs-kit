@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
     "outDir": "./dist",
     "rootDir": "src/",
     "strict": false,
@@ -14,11 +14,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "declaration": true
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.vue", "src/**/*.md"],
-  "exclude": ["node_modules", "template", "template-light", "src2"]
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.vue", "src/**/*.md", "src/**/*.css"],
+  "exclude": ["node_modules", "template", "template-light", "src3"]
 }

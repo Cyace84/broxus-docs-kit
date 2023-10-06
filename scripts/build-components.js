@@ -1,6 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-const tsConfig = require('./../tsconfig.json');
+import fs from 'fs';
+import path from 'path';
+
+// const fs = require('fs');
+// const path = require('path');
+// const tsConfig = require('./../tsconfig.json');
 
 function copyFileSync(source, target) {
   let targetFile = target;
@@ -13,7 +16,7 @@ function copyFileSync(source, target) {
   }
 
   const extension = path.extname(source);
-  if (extension === '.vue' || extension === '.scss' || extension === '.css') {
+  if (extension === '.vue') { 
     try {
       fs.writeFileSync(targetFile, fs.readFileSync(source));
     } catch (err) {
@@ -52,6 +55,8 @@ function copyFolderRecursiveSync(source, target) {
     copyFileSync(source, target);
   }
 }
+
+const tsConfig = JSON.parse(fs.readFileSync('./tsconfig.json'));
 
 const sources = ['src/theme/components', 'src/theme/styles', 'src/theme/main.scss'];
 const target = path.join(tsConfig.compilerOptions.outDir, 'theme');

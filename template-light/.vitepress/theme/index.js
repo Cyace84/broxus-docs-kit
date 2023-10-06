@@ -1,6 +1,6 @@
-import { BroxusTheme } from 'broxus-docs-kit-dev';
+import BroxusTheme from 'broxus-docs-kit-dev/theme/BroxusTheme';
 
-import PackDataSample from '@components/demos/PackDataSample.vue';
+import PackDataSample from './../../src/components/demos/PackDataSample.vue';
 
 export default {
   ...BroxusTheme,

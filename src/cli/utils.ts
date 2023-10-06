@@ -1,9 +1,16 @@
 import fs from 'fs';
-import { copySync } from 'fs-extra';
+import pkg from 'fs-extra';
+const { copySync } = pkg;
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import fileConfig from './source-map.js';
 const TEMPLATE_PATH = path.join(__dirname, '../../template');
+const TEMPLATE_LIGHT_PATH = path.join(__dirname, '../../template-light');
 
 interface ConfigParams {
   docTitle: string;
@@ -99,9 +106,12 @@ export async function copyTemplateFiles(folderName: string, mode: string) {
     fs.mkdirSync(folderName);
   }
 
-  copyRecursive(TEMPLATE_PATH, folderName, mode);
-
   if (mode === 'full') {
+    copyRecursive(TEMPLATE_PATH, folderName, mode);
     await copyAdditionalFiles(folderName);
+
+    return;
   }
+
+  copyRecursive(TEMPLATE_LIGHT_PATH, folderName, mode);
 }

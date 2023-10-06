@@ -12,6 +12,7 @@ import dts from 'rollup-plugin-dts';
 import vue from 'rollup-plugin-vue';
 import scss from 'rollup-plugin-scss';
 import css from 'rollup-plugin-css-only';
+//import vue from '@vitejs/plugin-vue';
 
 const require = createRequire(import.meta.url);
 const pkg = require('./package.json');
@@ -39,12 +40,12 @@ const plugins = [
     'navigator.userAgent': 'undefined',
     preventAssignment: true,
   }),
-  // vue(),
+  vue(),
   // scss(),
-  // css({ output: 'bundle.css' }),
+  css({ output: 'bundle.css' }),
   commonjs(),
   nodeResolve({ preferBuiltins: false }),
-  esbuild({ target: 'node14' }),
+  esbuild({ target: 'node18' }),
   json(),
 ];
 

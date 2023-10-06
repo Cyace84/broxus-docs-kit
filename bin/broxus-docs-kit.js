@@ -2,4 +2,4 @@
 //@ts-check
 
 /* eslint-disable @typescript-eslint/no-var-requires */
-require("./../dist/cli/cli");
+import('./../dist/cli/cli.js');

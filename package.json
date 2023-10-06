@@ -1,38 +1,45 @@
 {
   "name": "broxus-docs-kit-dev",
-  "version": "1.3.0",
+  "version": "1.4.0-dev.24",
   "description": "Broxus Docs Kit is a Vue.js and VitePress-based toolkit for streamlining Broxus project documentation. It offers ready-to-use templates and custom components, ensuring consistent, up-to-date, and clear documentation built on a user-friendly tech stack.",
   "license": "MIT",
   "repository": "https://github.com/cyace84/broxus-docs-kit",
   "author": "Valentyn Zavizion",
   "main": "dist/index.js",
+  "type": "module",
+  "styles": "dist/theme/styles/main.css",
   "bin": {
-    "broxus-docs-kit-dev": "bin/broxus-docs-kit"
+    "broxus-docs-kit-dev": "bin/broxus-docs-kit.js"
   },
   "exports": {
     ".": "./dist/index.js",
+    "./dist/*": "./dist/*",
     "./dist/cli/cli": "./dist/cli/cli.js",
-    "./styles": "./dist/styles/"
+    "./styles": "./dist/styles/",
+    "./theme/main.css": "./dist/theme/styles/main.css",
+    "./theme/BroxusTheme": "./dist/theme/BroxusTheme.js",
+    "./theme/components/": "./dist/theme/components/"
   },
   "files": [
     "/bin",
     "/dist",
     "/src",
     "/template",
+    "/template-light",
     "/LICENSE",
     "/package.json"
   ],
   "scripts": {
-    "build:clean": "rm -rf dist",
     "build:tsc": "tsc",
     "build:components": "node ./scripts/build-components.js",
-    "build": "npm run lint && npm run build:clean && npm run build:tsc && npm run build:rollup",
+    "build": "rimraf dist && vue-tsc --noEmit && tsc && npm run build:components && npm run build:css",
     "build:rollup": "rollup -c",
+    "build:css": "node-sass src/theme/styles -o dist/theme/styles && node-sass src/theme/ -o dist/theme/",
     "lint": "eslint 'src/**/*.{js,ts,vue}'",
     "lint:fix": "eslint 'src/**/*.{js,ts,vue}' --fix"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "everscale-inpage-provider": "0.3.61",
     "everscale-standalone-client": "2.1.19",
     "fs-extra": "^11.1.1",
@@ -40,7 +47,8 @@
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.9",
     "vitepress": "1.0.0-beta.3",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.0.0",
@@ -53,20 +61,25 @@
     "@types/esprima": "^4.0.3",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash": "^4.14.195",
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.8.2",
     "@types/prompts": "^2.4.4",
     "@types/rollup-plugin-css-only": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.60.0",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "broxus-docs-kit-dev": "^1.4.0-dev.22",
     "escodegen": "^2.0.0",
-    "eslint": "8.43.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.5.0",
+    "eslint": "8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-sonarjs": "^0.19.0",
-    "eslint-plugin-vue": "^9.15.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-sonarjs": "^0.21.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "node-sass": "^9.0.0",
+    "prettier": "^3.0.3",
+    "rimfar": "^3.0.2-omega",
     "rollup": "^3.25.1",
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-dts": "^5.3.0",
@@ -75,6 +88,7 @@
     "rollup-plugin-typescript2": "^0.35.0",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.63.6",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vue-tsc": "^1.8.15"
   }
 }

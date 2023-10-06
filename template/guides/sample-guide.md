@@ -84,10 +84,6 @@ Finally, use your Vue component in any markdown file like this:
 <PackDataSample />
 ```
 
-Now, whenever you build your VitePress site, your Vue component will render wherever you've used its tag in your markdown files.
-
----
-
 This guide should help you understand how to use Vue components in your markdown files when working with VitePress. Feel free to replace the `PackDataSample` component with any component you wish to use in your documentation.
 
 ## Advanced Vue Components Usage with VitePress
@@ -189,10 +185,4 @@ The component includes three buttons to interact with the TON blockchain:
 
 - **Change Account**: This button, when clicked, calls the `changeAccountWallet` function that changes the active account in the connected wallet.
 - **Disconnect**: This button, when clicked, calls the `disconnectWallet` function that disconnects the app from the user's wallet.
-- **Connect**: This button, visible only when the user is not connected, when clicked, calls the `requestPermissions` function that requests
-
-permission to connect to the user's wallet.
-
----
-
-With this, you now know how to use a custom Vue hook within a Vue component and use it in your markdown files. This opens up a world of possibilities, and you can now effectively create dynamic, interactive documentation that interacts with services such as TON Blockchain.
+- **Connect**: This button, visible only when the user is not connected, when clicked, calls the `requestPermissions` function that requests permission to connect to the user's wallet.

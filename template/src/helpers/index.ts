@@ -1,5 +1,4 @@
 import { Transaction } from 'everscale-inpage-provider';
-import { toast } from './toast';
 import { getSavedProviderKey } from '../providers/useProvider';
 
 export const testContract = {
@@ -58,7 +57,7 @@ export const tryLoadTvcFromFile = async (filePath: string) => {
 export const toNano = (value: number) => String(value * 1e9);
 
 export const errorExtractor = async <
-  T extends { transaction: Transaction; output?: Record<string, unknown> }
+  T extends { transaction: Transaction; output?: Record<string, unknown> },
 >(
   transactionResult: Promise<T>
 ): Promise<T> => {

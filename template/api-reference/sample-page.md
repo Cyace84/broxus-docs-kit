@@ -56,4 +56,6 @@ The page's content is then rendered dynamically based on the fetched API documen
 </template>
 ```
 
+:::warning Caution
 Please remember to keep the `apiReference: true` attribute in the front matter of the pages for which you wish to fetch API documentation.
+:::
