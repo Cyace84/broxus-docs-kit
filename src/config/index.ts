@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv';
-
 export type NodeEnv = 'local' | 'dev' | 'prod';
 
 export function getApiUrl(nodeEnv: NodeEnv) {
-  dotenv.config({ path: `.${nodeEnv}.env` });
-
-  return process.env.API_URL;
+  if (nodeEnv === 'local') {
+    return 'https://creaitive.cloud/api/v1/get/api-reference';
+  } else {
+    return 'http://localhost:3000/api/v1/get/api-reference';
+  }
 }

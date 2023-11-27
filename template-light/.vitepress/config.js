@@ -64,6 +64,15 @@ module.exports = {
     socialLinks: [{ icon: 'github', link: GITHUB_URL }],
   },
 
+  vite: {
+    ssr: {
+      noExternal: ['broxus-docs-kit-dev'],
+    },
+    optimizeDeps: {
+      include: ['everscale-inpage-provider'],
+    },
+  },
+
   esbuild: {
     target: ['chrome89', 'edge89', 'firefox79', 'safari14.1'],
   },

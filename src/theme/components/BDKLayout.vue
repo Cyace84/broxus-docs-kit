@@ -3,7 +3,7 @@ import { useRoute, useData } from 'vitepress';
 import DefaultTheme from 'vitepress/theme';
 import { onMounted, computed, ref, Ref, onUpdated } from 'vue';
 
-import { getApiReference, ApiRefPage } from './../../../src/api';
+import { getApiReference, ApiRefPage } from './../../api';
 import BDKWalletControl from './BDKWalletControl.vue';
 import BDKOutline from './shared/outline/BDKOutline.vue';
 

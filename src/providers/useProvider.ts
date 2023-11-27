@@ -5,7 +5,6 @@ import {
   Permissions,
   Provider,
   ProviderEvent,
-  ProviderNotInitializedException,
   ProviderRpcClient,
   ProviderMethod,
   RawProviderRequest,
@@ -14,6 +13,10 @@ import {
 } from 'everscale-inpage-provider';
 
 import ProviderSelector from './../theme/components/ProviderSelector.vue';
+
+export declare class ProviderNotInitializedException extends Error {
+    constructor();
+}
 
 type ConnectorWallet = {
   title: string;

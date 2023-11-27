@@ -1,6 +1,6 @@
 {
   "name": "broxus-docs-kit-dev",
-  "version": "1.4.0-dev.25",
+  "version": "1.4.0-dev.28",
   "description": "Broxus Docs Kit is a Vue.js and VitePress-based toolkit for streamlining Broxus project documentation. It offers ready-to-use templates and custom components, ensuring consistent, up-to-date, and clear documentation built on a user-friendly tech stack.",
   "license": "MIT",
   "repository": "https://github.com/cyace84/broxus-docs-kit",
@@ -39,9 +39,6 @@
     "lint:fix": "eslint 'src/**/*.{js,ts,vue}' --fix"
   },
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "everscale-inpage-provider": "0.3.61",
-    "everscale-standalone-client": "2.1.19",
     "fs-extra": "^11.1.1",
     "prompts": "^2.4.2",
     "unplugin-vue-components": "^0.24.1",
@@ -49,6 +46,10 @@
     "vitepress": "1.0.0-beta.3",
     "vue": "^3.3.4",
     "vue-toastification": "^2.0.0-rc.5"
+  },
+  "peerDependencies": {
+    "everscale-inpage-provider": "^0.3.63",
+    "everscale-standalone-client": "^2.1.23"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.0.0",
